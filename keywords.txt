@@ -1,0 +1,23 @@
+#######################################
+# Syntax Coloring Map MCP23018
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MCP23018	KEYWORD1	MCP23018
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+SetPullups	KEYWORD2
+SetPortA	KEYWORD2
+SetPortB	KEYWORD2
+SetPorts	KEYWORD2
+GetPortA	KEYWORD2
+GetPortB	KEYWORD2
+GetLatchPortA	KEYWORD2
+GetLatchPortB	KEYWORD2
+SetPortB_bits	KEYWORD2	
