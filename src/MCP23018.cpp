@@ -31,8 +31,13 @@ const uint8_t OLATB = 0x15;
 void MCP23018::writeToRegister(uint8_t address, uint8_t data)
 {
 	Wire.beginTransmission(i2c_address);
+#if defined(ARDUINO) && ARDUINO >= 100
+	Wire.write(address);
+	Wire.write(data);
+#else
 	Wire.send(address);
 	Wire.send(data);
+#endif
 	Wire.endTransmission();
 
 #ifdef DEBUG
@@ -48,9 +53,15 @@ void MCP23018::writeToRegister(uint8_t address, uint8_t data)
 void MCP23018::writePairToRegister(uint8_t address, uint8_t first_data, uint8_t second_data)
 {
 	Wire.beginTransmission(i2c_address);
+#if defined(ARDUINO) && ARDUINO >= 100
+	Wire.write(address);
+	Wire.write(first_data);
+	Wire.write(second_data);
+#else
 	Wire.send(address);
 	Wire.send(first_data);
 	Wire.send(second_data);
+#endif
 	Wire.endTransmission();
 	
 #ifdef DEBUG
@@ -69,7 +80,11 @@ uint8_t MCP23018::readFromRegister(uint8_t address)
 	
 	// Establish connection, select receipt address
 	Wire.beginTransmission(i2c_address);
+#if defined(ARDUINO) && ARDUINO >= 100
+	Wire.write(address);
+#else
 	Wire.send(address);
+#endif
 	Wire.endTransmission();
 	
 	// Request one data byte
@@ -84,7 +99,11 @@ uint8_t MCP23018::readFromRegister(uint8_t address)
 	// Fill variables when ready
 	if(Wire.available())
 	{
+#if defined(ARDUINO) && ARDUINO >= 100
+		received_data = Wire.read();
+#else
 		received_data = Wire.receive();
+#endif
 #ifdef DEBUG
 		Serial.println(received_data ,HEX);
 #endif
